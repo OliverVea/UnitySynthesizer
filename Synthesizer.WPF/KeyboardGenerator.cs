@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
-using Synthesizer.Core.Abstractions;
-using Synthesizer.Core.SignalProcessing;
+using Synthesizer.Core.Domain;
+using Synthesizer.Core.Extensions;
 
 namespace Synthesizer.WPF;
 

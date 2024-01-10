@@ -1,11 +1,13 @@
-﻿using System.IO;
+﻿using System.IO.Pipes;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Synthesizer.Core;
-using Synthesizer.Core.SignalProcessing;
-using Synthesizer.Core.SignalProcessing.Modules;
+using Synthesizer.Core.Domain;
+using Synthesizer.Core.Domain.Modules;
+using Synthesizer.Core.Extensions;
+using Synthesizer.Core.Infrastructure.Api;
+using Synthesizer.Core.Infrastructure.NAudio;
 
 namespace Synthesizer.WPF;
 
@@ -21,22 +23,30 @@ public partial class App : Application
     {
         base.OnStartup(startupEventArgs);
         
+        /*
         _configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
             .Build();
         
         var samplingConfiguration = Configuration.GetSamplingConfiguration();
+        */
         
         _services = new ServiceCollection()
-            .AddSynthesizerCore(samplingConfiguration)
             .AddSingleton<MainWindow>()
+            .AddSynthesizerClientServices()
             .BuildServiceProvider();
         
-        BuildSynthesizer(Services);
+        var message = new EchoMessage
+        {
+            Message = "Hello, World!"
+        };
+
+        var namedPipeClientStream = _services.GetRequiredService<NamedPipeClientStream>();
+        namedPipeClientStream.Connect();
         
-        var playbackController = Services.GetRequiredService<PlaybackController>();
-        playbackController.Start();
+        var service = _services.GetRequiredService<MessageService>();
+        service.WriteMessageAsync(message, CancellationToken.None).Wait();
 
         var window = _services.GetRequiredService<MainWindow>();
         window.Show();
@@ -88,7 +98,7 @@ public partial class App : Application
         keyboardGenerator.AddKeymapEntry(Key.P, keyboardGate, 1, 0);
         
         var oscillator = synthesizer.CreateModule<Oscillator>();
-        oscillator.Waveform = Waveform.Square;
+        oscillator.Waveform = Waveform.Sawtooth;
         oscillator.FrequencyInput = keyboardFrequency;
         oscillator.AmplitudeInput = signalBus.CreateSignal(0.5);
         oscillator.SignalOutput = signalBus.CreateSignal();
@@ -99,9 +109,22 @@ public partial class App : Application
         envelopeGenerator.SignalOutput = signalBus.CreateSignal();
         
         var lowPassFilter = synthesizer.CreateModule<ButterworthLowpass>();
-        lowPassFilter.CutoffFrequencyInput = signalBus.CreateSignal(5000);
+        lowPassFilter.CutoffFrequencyInput = signalBus.CreateSignal(3000);
         lowPassFilter.SignalInput = envelopeGenerator.SignalOutput;
-        lowPassFilter.SignalOutput = synthesizerOutputSignal;
+        lowPassFilter.SignalOutput = signalBus.CreateSignal();
+
+        var delayTimeOscillator = synthesizer.CreateModule<Oscillator>();
+        delayTimeOscillator.AmplitudeInput = signalBus.CreateSignal(0.4);
+        delayTimeOscillator.OffsetInput = signalBus.CreateSignal(0.5);
+        delayTimeOscillator.FrequencyInput = signalBus.CreateSignal(333);
+        delayTimeOscillator.SignalOutput = signalBus.CreateSignal();
+
+        var delay = synthesizer.CreateModule<Delay>();
+        delay.SignalInput = lowPassFilter.SignalOutput;
+        delay.DelayTimeInput = delayTimeOscillator.SignalOutput;
+        delay.MixInput = signalBus.CreateSignal(0.5);
+        delay.FeedbackInput = signalBus.CreateSignal(1);
+        delay.SignalOutput = synthesizerOutputSignal;
     }
 
     protected override void OnExit(ExitEventArgs e)
