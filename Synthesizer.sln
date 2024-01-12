@@ -1,8 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synthesizer.WPF", "Synthesizer.WPF\Synthesizer.WPF.csproj", "{7B5008D7-4447-45A5-89FD-87DF4B6F33A9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "srcSynthesizer.WPF", "src\Synthesizer.WPF\Synthesizer.WPF.csproj", "{7B5008D7-4447-45A5-89FD-87DF4B6F33A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synthesizer.Core", "Synthesizer.Core\Synthesizer.Core.csproj", "{BD1460ED-71E2-4003-921F-3F10483A433B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synthesizer.Core", "src\Synthesizer.Core\Synthesizer.Core.csproj", "{BD1460ED-71E2-4003-921F-3F10483A433B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synthesizer.Shared", "src\Synthesizer.Shared\Synthesizer.Shared.csproj", "{1E9A630F-8A8B-442C-8CAB-967F9351AEDA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6203F0CE-1718-4A24-AF99-8FC01DAC4B2A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{60255F17-C9B4-4CFF-8443-F0C632F390B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synthesizer.Shared.Tests", "tests\Synthesizer.Shared.Tests\Synthesizer.Shared.Tests.csproj", "{E8FF49A0-8314-4279-98E1-951401CB7B5C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{7B1170B6-DD11-4CDC-928C-59BFF5DEB0AF}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +31,19 @@ Global
 		{BD1460ED-71E2-4003-921F-3F10483A433B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD1460ED-71E2-4003-921F-3F10483A433B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD1460ED-71E2-4003-921F-3F10483A433B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E9A630F-8A8B-442C-8CAB-967F9351AEDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E9A630F-8A8B-442C-8CAB-967F9351AEDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E9A630F-8A8B-442C-8CAB-967F9351AEDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E9A630F-8A8B-442C-8CAB-967F9351AEDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8FF49A0-8314-4279-98E1-951401CB7B5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8FF49A0-8314-4279-98E1-951401CB7B5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8FF49A0-8314-4279-98E1-951401CB7B5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8FF49A0-8314-4279-98E1-951401CB7B5C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7B5008D7-4447-45A5-89FD-87DF4B6F33A9} = {6203F0CE-1718-4A24-AF99-8FC01DAC4B2A}
+		{BD1460ED-71E2-4003-921F-3F10483A433B} = {6203F0CE-1718-4A24-AF99-8FC01DAC4B2A}
+		{1E9A630F-8A8B-442C-8CAB-967F9351AEDA} = {6203F0CE-1718-4A24-AF99-8FC01DAC4B2A}
+		{E8FF49A0-8314-4279-98E1-951401CB7B5C} = {60255F17-C9B4-4CFF-8443-F0C632F390B4}
 	EndGlobalSection
 EndGlobal
