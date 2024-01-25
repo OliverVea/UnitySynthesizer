@@ -1,6 +1,7 @@
 ﻿using ProtoBuf;
+using Synthesizer.Shared;
 
-namespace Synthesizer.Shared.Messages
+namespace Synthesizer.Messages
 {
     [ProtoContract]
     public class QuitMessage : Message
