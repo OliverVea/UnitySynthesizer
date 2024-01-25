@@ -7,29 +7,29 @@ namespace Synthesizer.Shared.Infrastructure
     internal class MessageRepository : IMessageRepository
     {
         private readonly IMessageSerializer _messageSerializer;
-        private readonly INamedPipeStream _namedPipeStream;
+        private readonly IConnectionManager _connectionManager;
 
-        public MessageRepository(IMessageSerializer messageSerializer, INamedPipeStream namedPipeStream)
+        public MessageRepository(IMessageSerializer messageSerializer, IConnectionManager connectionManager)
         {
             _messageSerializer = messageSerializer;
-            _namedPipeStream = namedPipeStream;
+            _connectionManager = connectionManager;
         }
 
         public void SendMessage<T>(T message) where T : Message
         {
             var serializedMessage = _messageSerializer.Serialize(message);
-            _namedPipeStream.Write(serializedMessage);
+            _connectionManager.NamedPipeStream.Write(serializedMessage);
         }
 
         public Task SendMessageAsync<T>(T message, CancellationToken cancellationToken) where T : Message
         {
             var serializedMessage = _messageSerializer.Serialize(message);
-            return _namedPipeStream.WriteAsync(serializedMessage, cancellationToken);
+            return _connectionManager.NamedPipeStream.WriteAsync(serializedMessage, cancellationToken);
         }
 
         public async Task<Message> ReceiveMessageAsync(CancellationToken cancellationToken)
         {
-            var serializedMessage = await _namedPipeStream.ReadAsync(cancellationToken);
+            var serializedMessage = await _connectionManager.NamedPipeStream.ReadAsync(cancellationToken);
             return _messageSerializer.Deserialize(serializedMessage);
         }
     }

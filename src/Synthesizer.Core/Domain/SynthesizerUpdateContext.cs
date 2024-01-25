@@ -1,6 +1,6 @@
 ﻿namespace Synthesizer.Core.Domain;
 
-public class SynthesizerUpdateContext
+public readonly struct SynthesizerUpdateContext
 {
-    public required double DeltaTime { get; set; }
+    public required double DeltaTime { get; init; }
 }

@@ -1,5 +1,11 @@
-/.idea
 
+# Rider
+**/.idea/*
+!**/.idea/**/runConfigurations
+!**/.idea/**/vcs.xml
+!**/.idea/**/indexlayout.xml
+**/*.DotSettings.user
+
+# .NET
 **/bin
 **/obj
-/Synthesizer.sln.DotSettings.user

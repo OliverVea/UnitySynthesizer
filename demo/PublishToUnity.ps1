@@ -1,0 +1,1 @@
+﻿dotnet publish .\Demo.Messages -o .\Demo.Gui\Assets\Libraries\Synthesizer\Messages -f netstandard2.1

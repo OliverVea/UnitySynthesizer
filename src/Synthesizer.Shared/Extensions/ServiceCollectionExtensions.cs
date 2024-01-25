@@ -9,7 +9,7 @@ namespace Synthesizer.Shared.Extensions
         public static IServiceCollection AddServerServices(this IServiceCollection services)
         {
             services.AddSharedServices();
-            services.AddSingleton<INamedPipeStream, ServerNamedPipeStream>();
+            services.AddSingleton<IConnectionManager, ConnectionManagementService<ServerNamedPipeStream>>();
             
             return services;
         }
@@ -17,7 +17,7 @@ namespace Synthesizer.Shared.Extensions
         public static IServiceCollection AddClientServices(this IServiceCollection services)
         {
             services.AddSharedServices();
-            services.AddSingleton<INamedPipeStream, ClientNamedPipeStream>();
+            services.AddSingleton<IConnectionManager, ConnectionManagementService<ClientNamedPipeStream>>();
             
             return services;
         }
@@ -29,7 +29,6 @@ namespace Synthesizer.Shared.Extensions
             services.AddSingleton<IMessageRepository, MessageRepository>();
             services.AddSingleton<IMessageSerializer, ProtobufMessageSerializer>();
             services.AddSingleton<IMessageSender, MessageSendingService>();
-            services.AddSingleton<IConnectionManager, ConnectionManagementService>();
         }
     }
 }

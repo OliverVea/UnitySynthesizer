@@ -1,1 +1,0 @@
-﻿dotnet publish ./src/Synthesizer.Shared -o ./temp

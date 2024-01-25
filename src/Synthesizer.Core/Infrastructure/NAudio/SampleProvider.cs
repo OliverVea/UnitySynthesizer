@@ -1,4 +1,5 @@
-﻿using NAudio.Wave;
+﻿using System;
+using NAudio.Wave;
 using Synthesizer.Core.Domain;
 
 namespace Synthesizer.Core.Infrastructure.NAudio;

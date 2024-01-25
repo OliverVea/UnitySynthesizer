@@ -1,6 +1,4 @@
-﻿using Synthesizer.Shared;
-
-namespace Synthesizer.Core.Domain;
+﻿namespace Synthesizer.Core.Domain;
 
 public class SignalBus
 {
@@ -27,9 +25,14 @@ public class SignalBus
     {
         var signalId = _releasedSignalIds.First();
         
+        return RecycleSignalId(signalId, defaultValue);
+    }
+
+    private SignalId RecycleSignalId(SignalId signalId, double defaultValue)
+    {
         _busses.Set(signalId.Id, defaultValue);
         _releasedSignalIds.Remove(signalId);
-        
+
         return signalId;
     }
 

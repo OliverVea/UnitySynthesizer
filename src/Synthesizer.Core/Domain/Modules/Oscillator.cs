@@ -9,7 +9,6 @@ public class Oscillator(SignalBus signalBus) : SynthesizerModule
     public SignalId? OffsetInput { get; set; }
     public SignalId? SignalOutput { get; set; }
 
-    [NonSerialized]
     private double _normalizedPhase;
     
     private double Frequency => signalBus.ReadSignalValue(FrequencyInput);
@@ -36,10 +35,10 @@ public class Oscillator(SignalBus signalBus) : SynthesizerModule
         return Waveform switch
         {
             Waveform.None => 0,
-            Waveform.Sine => Math.Sin(_normalizedPhase * 2 * Math.PI),
-            Waveform.Square => Math.Round(_normalizedPhase) * 2 - 1,
-            Waveform.Sawtooth => _normalizedPhase * 2 - 1,
-            Waveform.Triangle => Math.Abs(_normalizedPhase * 4 - 2) - 1,
+            Waveform.Sine => WaveformHelper.SampleSine(_normalizedPhase),
+            Waveform.Square => WaveformHelper.SampleSquare(_normalizedPhase),
+            Waveform.Sawtooth => WaveformHelper.SampleSawtooth(_normalizedPhase),
+            Waveform.Triangle => WaveformHelper.SampleTriangle(_normalizedPhase),
             _ => throw new ArgumentOutOfRangeException()
         };
     }
