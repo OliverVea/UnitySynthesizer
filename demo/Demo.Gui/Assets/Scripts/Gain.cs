@@ -7,7 +7,8 @@ using UnityEngine.UI;
 
 namespace Demo.Gui
 {
-    public class LowPassFilter : MonoBehaviour
+    
+    public class Gain : MonoBehaviour
     {
         private static IMessageSender MessageSender => ServiceLocator.GetRequiredService<IMessageSender>();
 
@@ -17,18 +18,13 @@ namespace Demo.Gui
         {
             var slidersByObjectName = GetComponentsInChildren<Slider>().ToDictionary(x => x.name);
 
-            var frequencySlider = slidersByObjectName["Cutoff"];
-            frequencySlider.onValueChanged.AddListener(OnFrequencyChanged);
-            OnFrequencyChanged(frequencySlider.value);
-            
-            //var resonanceSlider = slidersByObjectName["Resonance"];
-            //resonanceSlider.onValueChanged.AddListener(OnResonanceChanged);
-            //OnResonanceChanged(resonanceSlider.value);
+            var gainSlider = slidersByObjectName["Gain"];
+            gainSlider.onValueChanged.AddListener(OnGainChanged);
+            OnGainChanged(gainSlider.value);
         }
-
-        private void OnFrequencyChanged(float cutoffFrequency) => _newValues[Signal.LowPassCutoff] = cutoffFrequency;
-        //private void OnResonanceChanged(float resonance) => _newValues[Signal.LowPassResonance] = resonance;
-
+        
+        private void OnGainChanged(float gain) => _newValues[Signal.Gain] = gain;
+        
         private void Update()
         {
             foreach (var (signal, value) in _newValues.ToArray())

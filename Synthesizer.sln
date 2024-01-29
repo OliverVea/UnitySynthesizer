@@ -10,8 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6203F0CE-171
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{60255F17-C9B4-4CFF-8443-F0C632F390B4}"
+	ProjectSection(SolutionItems) = preProject
+		tests\README.md = tests\README.md
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Shared", "tests\Tests.Shared\Tests.Shared.csproj", "{E8FF49A0-8314-4279-98E1-951401CB7B5C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synthesizer.Tests", "tests\Synthesizer.Tests\Synthesizer.Tests.csproj", "{E8FF49A0-8314-4279-98E1-951401CB7B5C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{7B1170B6-DD11-4CDC-928C-59BFF5DEB0AF}"
 	ProjectSection(SolutionItems) = preProject
