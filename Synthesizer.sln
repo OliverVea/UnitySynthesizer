@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6203F0CE-171
 		src\README.md = src\README.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{60255F17-C9B4-4CFF-8443-F0C632F390B4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{60255F17-C9B4-4CFF-8443-F0C632F390B4}"
 	ProjectSection(SolutionItems) = preProject
 		tests\README.md = tests\README.md
 	EndProjectSection
