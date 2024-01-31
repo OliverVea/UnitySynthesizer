@@ -1,4 +1,4 @@
-[## Introduction
+## Introduction
 
 Welcome to Vynth, an innovative and extensible framework for simulating modular synthesizers, meticulously crafted in C#.
 At the heart of Vynth lies a fusion of technology and creativity, offering developers and audio enthusiasts a robust platform for synthesizer sound generation and processing within the .NET ecosystem.
